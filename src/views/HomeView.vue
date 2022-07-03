@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div>
-      <h2>{{ appTitle }}</h2>
+      <h2 ref="appTitleRef">{{ appTitle }}</h2>
       <h3>{{ counterData.title }}</h3>
       <button @click="decreaseCounter(2)" class="btn">--</button>
       <button @click="decreaseCounter(1)" class="btn">-</button>
@@ -22,6 +22,7 @@
 <script setup>
 // reactive objects
 import {
+  ref,
   reactive,
   computed,
   watch,
@@ -56,6 +57,15 @@ watch(
     }
   }
 );
+
+//template refs
+
+const appTitleRef = ref(null);
+
+onMounted(() => {
+  console.log(`The app title is ${appTitleRef.value.offsetWidth}px wide`);
+  console.log(`The app title is ${appTitleRef.value.offsetHeight}px high`);
+});
 
 //onBeforeUpdated, fired befre template is updated
 onBeforeUpdate(() => {

@@ -1,27 +1,26 @@
 <template>
   <div class="modals">
     <h1>Modals</h1>
-    <button>Show modal</button>
-    <div class="modal" v-if="showModal">
-      <h1>This is a modal</h1>
+    <button @click="showModal = true">Show modal</button>
+    <component v-if="showModal" :is="Modal" @hideModal="showModal = false">
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem fuga
         at nobis ducimus quaerat obcaecati iusto voluptates deleniti maiores
         libero cumque incidunt esse, veniam qui quisquam saepe error, recusandae
         delectus?
       </p>
-      <button>Hide modal</button>
-    </div>
+    </component>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import Modal from "../components/Modal.vue";
 
 const showModal = ref(false);
 </script>
 
-<style scoped>
+<style>
 p {
   text-transform: uppercase;
 }
@@ -37,7 +36,17 @@ button {
 }
 
 a {
-  color: white;
+  color: hsl(160, 100%, 37%);
   text-transform: uppercase;
+}
+.modal {
+  background: rgb(218, 217, 217);
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 </style>
